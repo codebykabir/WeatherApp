@@ -1,0 +1,8 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "weatheApp",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	}
+}
