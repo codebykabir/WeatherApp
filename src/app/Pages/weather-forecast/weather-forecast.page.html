@@ -1,0 +1,72 @@
+<ion-header class="header">
+  weatherForecast
+
+</ion-header>
+
+<ion-content>
+  <ion-grid class="containeGrid" *ngIf="forecastData && !isLoading">
+    <ion-row>
+      <ion-col class="cityLabel ion-no-padding" size="12">
+        {{forecastData?.location?.name}}, {{forecastData?.location?.country }}
+      </ion-col>
+      <ion-col class="weatherLabel ion-no-padding" size="12">
+        <ion-label>
+          Weekly Forecast
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    
+    <div *ngIf="forecastData?.forecast?.forecastday">
+      <ion-row class="forecastRow" *ngFor="let item of forecastData?.forecast?.forecastday">
+      <ion-col size="4" >
+        <ion-label>
+          {{getDayName(item?.date)}}
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="highTempLabel">
+          {{item?.day?.maxtemp_c}}°
+        </ion-label>
+        <span class="lowTempSpan">{{item?.day?.mintemp_c}}°</span>
+      </ion-col>
+      <ion-col size="4" class="weatherIconCol">
+        <img class="WeatherIcon" src="{{item?.day?.condition?.icon}}"/>
+        <ion-label>
+           {{item?.day?.condition?.text}}
+        </ion-label>
+      </ion-col>
+    </ion-row>
+      
+  </div>
+      <!-- <ion-col size="4">
+        <ion-label>
+          THU
+        </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="highTempLabel">
+          26°
+        </ion-label>
+        <span class="lowTempSpan">19°</span>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label>
+          <ion-icon name="cloudy-outline"></ion-icon> Cloudy
+        </ion-label>
+      </ion-col> -->
+    
+  </ion-grid>
+
+  <ion-grid class="!containeGrid" *ngIf="!forecastData && !isLoading">
+    <img src="./../../../assets/imgs/noData.png" />
+  </ion-grid>
+  
+  <ion-grid class="loadingGrid" *ngIf="isLoading" >
+    <ion-label>Please Wait Loading...</ion-label>
+    <div class="spinnerDiv">
+      <ion-spinner name="lines"></ion-spinner>
+    </div>
+    
+</ion-grid>
+
+</ion-content>
